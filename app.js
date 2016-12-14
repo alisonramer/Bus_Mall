@@ -1,40 +1,53 @@
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+// BUS MALL - CodeFellows Project by Alison Ramer
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 'use strict'
 
 var filePath = ['img/bag.jpg', 'img/banana.jpg', 'img/bathroom.jpg', 'img/boots.jpg', 'img/breakfast.jpg', 'img/bubblegum.jpg', 'img/chair.jpg', 'img/cthulhu.jpg', 'img/dog-duck.jpg', 'img/dragon.jpg', 'img/pen.jpg', 'img/pet-sweep.jpg', 'img/scissors.jpg', 'img/shark.jpg', 'img/sweep.png', 'img/tauntaun.jpg', 'img/unicorn.jpg', 'img/usb.gif', 'img/water-can.jpg', 'img/wine-glass.jpg'];
 
 var products = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can'];
 
-var clickCounter = [];
-var randomizedImages;
 var allProducts = [];
+var randomizedImages;
+var clickCounter = 0;
+var numberofApperances = 0;
 
-// var clickTotal = 0;
-
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+// CONSTRUCTOR FUNCTION
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
 function MakeProducts (products, filePath) {
   //for each one of the products of the stores we're going to make the following calculations //
   this.products = products;
   this.filePath = filePath;
   this.clicks = 0;
-  this.numberofApperances = [];
+  this.numberofApperances = 0;
 }
 //new object that has the above qualities defined.
 
-function create (){
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+// FUNCTION DECLARATIONS
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+function makeNewProducts (){
   for (var i = 0; i < filePath.length; i++) {
     allProducts.push (new MakeProducts(products[i], filePath[i]));
   }
 }
-create();
+makeNewProducts();
 
-//randomize images//
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+//  RANDOMIZED IMAGES
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 function randomizeImages () {
   randomizedImages = Math.floor(Math.random() * (20-0) + 0);
 }
-// randomizeImages ();
 
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+// RENDER PRODCUCTS
 //now we are going to take the information that we organized and print it onto the screen - with images
-
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 function renderProducts () {
   //you are defining that the left image is going to be attached to the HTML in the spot with the 'left' attribute. Then you set the src attribute to an actual file path so that it will be displayed on the page.
@@ -49,7 +62,13 @@ function renderProducts () {
 
   randomizeImages ();
   var rightImage = document.getElementById('right');
-  rightImage.src = filePath[randomizedImages];
+  rightImage.src = filePath[randomizedImages].numberofApperances;
+
+  //Number of Appearances Counter//
+  numberofApperances +=1;
+  console.log(clickCounter, 'total appearances');
+
+  //Make sure there are no Duplicates //
 
   while (leftImage.src === centerImage.src || leftImage.src === rightImage.src || centerImage.src === rightImage.src){
     randomizeImages ();
@@ -62,9 +81,10 @@ function renderProducts () {
 }
 renderProducts();
 
-//Random Images//
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+// EVENT HANDLER
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-//Event Handler//
 function handleClick(event) {
   event.preventDefault();
   //identify who was clicked
@@ -91,7 +111,8 @@ function handleClick(event) {
   //tally valid clicks
   clickCounter +=1;
   console.log(clickCounter, 'total clicks');
-    //check whether total clicks <25
+
+  //check if total clicks <25
   if (clickCounter > 25) {
     return alert ('You Outta Clicks Jane');
   }
@@ -107,6 +128,10 @@ function handleClick(event) {
   displayList();
 }
 
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+// ADD EVENT LISTENER
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 picContainer.addEventListener('click', handleClick)
 
 var picList = document.getElementById('picList');
@@ -121,5 +146,5 @@ function displayList() {
     picList.appendChild(liEl2);
   }
 }
-//
+
 renderProducts();
