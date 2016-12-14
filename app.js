@@ -1,5 +1,5 @@
 'use strict'
-
+var clickCounter = 0;
 var allProducts = [];
 var filePath = ['img/bag.jpg', 'img/banana.jpg', 'img/bathroom.jpg', 'img/boots.jpg', 'img/breakfast.jpg', 'img/bubblegum.jpg', 'img/chair.jpg', 'img/cthulhu.jpg', 'img/dog-duck.jpg', 'img/dragon.jpg', 'img/pen.jpg', 'img/pet-sweep.jpg', 'img/scissors.jpg', 'img/shark.jpg', 'img/sweep.png', 'img/tauntaun.jpg', 'img/unicorn.jpg', 'img/usb.gif', 'img/water-can.jpg', 'img/wine-glass.jpg'];
 
@@ -75,8 +75,24 @@ if (event.target.id === 'left'){
   allProducts[0].clicks +=1;
   console.log(allProducts[0]);
 }
+
+if (event.target.id === 'center'){
+  allProducts[0].clicks +=1;
+  console.log(allProducts[0]);
+}
+
+if (event.target.id === 'right'){
+  allProducts[0].clicks +=1;
+  console.log(allProducts[0]);
+}
   //tally valid clicks
-  //check whether total clicks <25
+
+  clickCounter +=1;
+  console.log(clickCounter, 'total clicks');
+    //check whether total clicks <25
+  if (clickCounter > 5) {
+    return alert ('You Outta Clicks Jane');
+  }
   //after 25, remove event listener on PicNames
     //after 25, show "results" button
     //clear old images
