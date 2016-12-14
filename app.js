@@ -1,4 +1,5 @@
 'use strict'
+
 var clickCounter = 0;
 var allProducts = [];
 var filePath = ['img/bag.jpg', 'img/banana.jpg', 'img/bathroom.jpg', 'img/boots.jpg', 'img/breakfast.jpg', 'img/bubblegum.jpg', 'img/chair.jpg', 'img/cthulhu.jpg', 'img/dog-duck.jpg', 'img/dragon.jpg', 'img/pen.jpg', 'img/pet-sweep.jpg', 'img/scissors.jpg', 'img/shark.jpg', 'img/sweep.png', 'img/tauntaun.jpg', 'img/unicorn.jpg', 'img/usb.gif', 'img/water-can.jpg', 'img/wine-glass.jpg'];
@@ -60,7 +61,6 @@ function randomizeImages () {
 }
 randomizeImages ();
 
-
 //Event Handler//
 function handleClick(event) {
   event.preventDefault();
@@ -77,20 +77,20 @@ if (event.target.id === 'left'){
 }
 
 if (event.target.id === 'center'){
-  allProducts[0].clicks +=1;
-  console.log(allProducts[0]);
+  allProducts[1].clicks +=1;
+  console.log(allProducts[1]);
 }
 
 if (event.target.id === 'right'){
-  allProducts[0].clicks +=1;
-  console.log(allProducts[0]);
+  allProducts[2].clicks +=1;
+  console.log(allProducts[2]);
 }
   //tally valid clicks
 
   clickCounter +=1;
   console.log(clickCounter, 'total clicks');
     //check whether total clicks <25
-  if (clickCounter > 5) {
+  if (clickCounter > 25) {
     return alert ('You Outta Clicks Jane');
   }
   //after 25, remove event listener on PicNames
@@ -101,7 +101,22 @@ if (event.target.id === 'right'){
   renderProducts();
   console.log(event.target, 'was clicked after')
 }
-// randomizeImages();
+randomizeImages();
 
-renderProducts();
 picContainer.addEventListener('click', handleClick)
+
+var picList = document.getElementById('picList');
+function displayList() {
+  picList.innerHTML = '';
+  for (var i = 0; i < allProducts.length; i++) {
+    var liEl = document.createElement('li');
+    var liEl2 = document.createElement('li');
+    liEl.textContent = allProducts[i].products + ' has been clicked ' + allProducts[i].clicks + ' times';
+    liEl2.textContent = allProducts[i].products + ' has been viewed ' + allProducts[i].numberofApperances + ' times';
+    picList.appendChild(liEl);
+    picList.appendChild(liEl2);
+  }
+}
+//
+displayList();
+renderProducts();
