@@ -54,19 +54,25 @@ function renderProducts () {
   randomizeImages ();
   var leftImage = document.getElementById('left');
   leftImage.src = filePath[randomizedImages];
+  leftImage.alt = randomizedImages;
+  allProducts[randomizedImages].numberofApperances+=1;
 
 //you are defining that the left image is going to be attached to the HTML in the spot with the 'left' attribute. Then you set the src attribute to an actual file path so that it will be displayed on the page.
   randomizeImages ();
   var centerImage = document.getElementById('center');
   centerImage.src = filePath[randomizedImages];
+  centerImage.alt = randomizedImages;
+  allProducts[randomizedImages].numberofApperances+=1;
 
   randomizeImages ();
   var rightImage = document.getElementById('right');
-  rightImage.src = filePath[randomizedImages].numberofApperances;
+  rightImage.src = filePath[randomizedImages];
+  rightImage.alt = randomizedImages;
+  allProducts[randomizedImages].numberofApperances+=1;
 
   //Number of Appearances Counter//
   numberofApperances +=1;
-  console.log(clickCounter, 'total appearances');
+  // console.log(clickCounter, leftImage.alt, centerImage.alt, rightImage.alt, 'total appearances');
 
   //Make sure there are no Duplicates //
 
@@ -88,29 +94,29 @@ renderProducts();
 function handleClick(event) {
   event.preventDefault();
   //identify who was clicked
-  console.log(event.target.src, 'was clicked')
+  // console.log(event.target.src, 'was clicked')
   //alert for clicks not on images
   if(event.target.id === 'picContainer'){
     return alert('Please, click on a picture.');
   }
 
   if (event.target.id === 'left'){
-    allProducts[0].clicks +=1;
-    console.log(allProducts[0]);
+    allProducts[event.target.alt].clicks +=1;
+    // console.log(allProducts[0]);
   }
 
   if (event.target.id === 'center'){
-    allProducts[1].clicks +=1;
-    console.log(allProducts[1]);
+    allProducts[event.target.alt].clicks +=1;
+    // console.log(allProducts[1]);
   }
 
   if (event.target.id === 'right'){
-    allProducts[2].clicks +=1;
-    console.log(allProducts[2]);
+    allProducts[event.target.alt].clicks +=1;
+    // console.log(allProducts[2]);
   }
   //tally valid clicks
   clickCounter +=1;
-  console.log(clickCounter, 'total clicks');
+  // console.log(clickCounter, 'total clicks');
 
   //check if total clicks <25
   if (clickCounter > 25) {
@@ -120,9 +126,9 @@ function handleClick(event) {
     //after 25, show "results" button
     //clear old images
   //display 3 new images
-  console.log(event.target, 'was clicked before')
+  // console.log(event.target, 'was clicked before')
   renderProducts();
-  console.log(event.target, 'was clicked after')
+  // console.log(event.target, 'was clicked after')
 
   randomizeImages();
   displayList();
