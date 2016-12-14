@@ -1,5 +1,5 @@
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
-// BUS MALL - CodeFellows Project by Alison Ramer
+// BUS MALL PROJECT - CodeFellows Project by Alison Ramer
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 'use strict'
