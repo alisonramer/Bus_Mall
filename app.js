@@ -13,7 +13,7 @@ function MakeProducts (products, filePath) {
   //for each one of the products of the stores we're going to make the following calculations //
   this.products = products;
   this.filePath = filePath;
-  this.clickTotal = 0;
+  this.clicks = 0;
   this.numberofApperances = 0;
 
 }
