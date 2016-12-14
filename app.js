@@ -8,7 +8,22 @@ var filePath = ['img/bag.jpg', 'img/banana.jpg', 'img/bathroom.jpg', 'img/boots.
 
 var products = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can'];
 
-var allProducts = [];
+if(localStorage.getItem('allProducts')){
+  var localStorageAllProducts = localStorage.getItem('allProducts');
+  var allProducts = JSON.parse(localStorageAllProducts);
+}else{
+  console.log('allProducts is blank');
+  var allProducts = [];
+  makeNewProducts();
+}
+//First we check to see fi we have anything in local storage
+//If we do we do have stuff then we set our alProducts array equal to loca storage.
+//If we don't have things in local stoage, we make twenty new products and a blank all products arry and we fill it.
+//
+
+
+
+
 var randomizedImages;
 var clickCounter = 0;
 var numberofApperances = 0;
@@ -34,7 +49,6 @@ function makeNewProducts (){
     allProducts.push (new MakeProducts(products[i], filePath[i]));
   }
 }
-makeNewProducts();
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 //  RANDOMIZED IMAGES
@@ -54,19 +68,25 @@ function renderProducts () {
   randomizeImages ();
   var leftImage = document.getElementById('left');
   leftImage.src = filePath[randomizedImages];
+  leftImage.alt = randomizedImages;
+  allProducts[randomizedImages].numberofApperances+=1;
 
 //you are defining that the left image is going to be attached to the HTML in the spot with the 'left' attribute. Then you set the src attribute to an actual file path so that it will be displayed on the page.
   randomizeImages ();
   var centerImage = document.getElementById('center');
   centerImage.src = filePath[randomizedImages];
+  centerImage.alt = randomizedImages;
+  allProducts[randomizedImages].numberofApperances+=1;
 
   randomizeImages ();
   var rightImage = document.getElementById('right');
-  rightImage.src = filePath[randomizedImages].numberofApperances;
+  rightImage.src = filePath[randomizedImages];
+  rightImage.alt = randomizedImages;
+  allProducts[randomizedImages].numberofApperances+=1;
 
   //Number of Appearances Counter//
   numberofApperances +=1;
-  console.log(clickCounter, 'total appearances');
+  // console.log(clickCounter, leftImage.alt, centerImage.alt, rightImage.alt, 'total appearances');
 
   //Make sure there are no Duplicates //
 
@@ -81,6 +101,11 @@ function renderProducts () {
 }
 renderProducts();
 
+function storeAllProducts (){
+  localStorageAllProducts = JSON.stringify(allProducts);
+  localStorage.setItem('allProducts', localStorageAllProducts);
+}
+
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 // EVENT HANDLER
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -88,29 +113,29 @@ renderProducts();
 function handleClick(event) {
   event.preventDefault();
   //identify who was clicked
-  console.log(event.target.src, 'was clicked')
+  // console.log(event.target.src, 'was clicked')
   //alert for clicks not on images
   if(event.target.id === 'picContainer'){
     return alert('Please, click on a picture.');
   }
 
   if (event.target.id === 'left'){
-    allProducts[0].clicks +=1;
-    console.log(allProducts[0]);
+    allProducts[event.target.alt].clicks +=1;
+    // console.log(allProducts[0]);
   }
 
   if (event.target.id === 'center'){
-    allProducts[1].clicks +=1;
-    console.log(allProducts[1]);
+    allProducts[event.target.alt].clicks +=1;
+    // console.log(allProducts[1]);
   }
 
   if (event.target.id === 'right'){
-    allProducts[2].clicks +=1;
-    console.log(allProducts[2]);
+    allProducts[event.target.alt].clicks +=1;
+    // console.log(allProducts[2]);
   }
   //tally valid clicks
   clickCounter +=1;
-  console.log(clickCounter, 'total clicks');
+  // console.log(clickCounter, 'total clicks');
 
   //check if total clicks <25
   if (clickCounter > 25) {
@@ -120,10 +145,10 @@ function handleClick(event) {
     //after 25, show "results" button
     //clear old images
   //display 3 new images
-  console.log(event.target, 'was clicked before')
+  // console.log(event.target, 'was clicked before')
   renderProducts();
-  console.log(event.target, 'was clicked after')
-
+  // console.log(event.target, 'was clicked after')
+  storeAllProducts();
   randomizeImages();
   displayList();
 }
