@@ -1,6 +1,6 @@
 'use strict'
 
-var clickCounter = 0;
+var clickCounter = [];
 var allProducts = [];
 var filePath = ['img/bag.jpg', 'img/banana.jpg', 'img/bathroom.jpg', 'img/boots.jpg', 'img/breakfast.jpg', 'img/bubblegum.jpg', 'img/chair.jpg', 'img/cthulhu.jpg', 'img/dog-duck.jpg', 'img/dragon.jpg', 'img/pen.jpg', 'img/pet-sweep.jpg', 'img/scissors.jpg', 'img/shark.jpg', 'img/sweep.png', 'img/tauntaun.jpg', 'img/unicorn.jpg', 'img/usb.gif', 'img/water-can.jpg', 'img/wine-glass.jpg'];
 
@@ -15,7 +15,7 @@ function MakeProducts (products, filePath) {
   this.products = products;
   this.filePath = filePath;
   this.clicks = 0;
-  this.numberofApperances = 0;
+  this.numberofApperances = [];
 
 }
 //new object that has the above qualities defined.
@@ -26,6 +26,14 @@ function create (){
   }
 }
 create();
+
+//randomize images//
+
+function randomizeImages () {
+  randomizedImages = Math.floor(Math.random() * (20-0) + 0);
+}
+// randomizeImages ();
+
 //now we are going to take the information that we organized and print it onto the screen - with images
 
 
@@ -56,10 +64,6 @@ function renderProducts () {
 renderProducts();
 
 //Random Images//
-function randomizeImages () {
-  randomizedImages = Math.floor(Math.random() * (20-0) + 0);
-}
-randomizeImages ();
 
 //Event Handler//
 function handleClick(event) {
@@ -86,7 +90,6 @@ if (event.target.id === 'right'){
   console.log(allProducts[2]);
 }
   //tally valid clicks
-
   clickCounter +=1;
   console.log(clickCounter, 'total clicks');
     //check whether total clicks <25
@@ -100,9 +103,10 @@ if (event.target.id === 'right'){
   console.log(event.target, 'was clicked before')
   renderProducts();
   console.log(event.target, 'was clicked after')
-}
-randomizeImages();
 
+randomizeImages();
+displayList();
+}
 picContainer.addEventListener('click', handleClick)
 
 var picList = document.getElementById('picList');
@@ -118,5 +122,4 @@ function displayList() {
   }
 }
 //
-displayList();
 renderProducts();
