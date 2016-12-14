@@ -22,8 +22,6 @@ if(localStorage.getItem('allProducts')){
 //
 
 
-
-
 var randomizedImages;
 var clickCounter = 0;
 var numberofApperances = 0;
