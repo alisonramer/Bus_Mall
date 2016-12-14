@@ -1,12 +1,12 @@
 'use strict'
 
-var clickCounter = [];
-var allProducts = [];
 var filePath = ['img/bag.jpg', 'img/banana.jpg', 'img/bathroom.jpg', 'img/boots.jpg', 'img/breakfast.jpg', 'img/bubblegum.jpg', 'img/chair.jpg', 'img/cthulhu.jpg', 'img/dog-duck.jpg', 'img/dragon.jpg', 'img/pen.jpg', 'img/pet-sweep.jpg', 'img/scissors.jpg', 'img/shark.jpg', 'img/sweep.png', 'img/tauntaun.jpg', 'img/unicorn.jpg', 'img/usb.gif', 'img/water-can.jpg', 'img/wine-glass.jpg'];
 
 var products = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can'];
 
+var clickCounter = [];
 var randomizedImages;
+var allProducts = [];
 
 // var clickTotal = 0;
 
@@ -16,7 +16,6 @@ function MakeProducts (products, filePath) {
   this.filePath = filePath;
   this.clicks = 0;
   this.numberofApperances = [];
-
 }
 //new object that has the above qualities defined.
 
@@ -71,24 +70,24 @@ function handleClick(event) {
   //identify who was clicked
   console.log(event.target.src, 'was clicked')
   //alert for clicks not on images
- if(event.target.id === 'picContainer'){
-  return alert('Please, click on a picture.');
-}
+  if(event.target.id === 'picContainer'){
+    return alert('Please, click on a picture.');
+  }
 
-if (event.target.id === 'left'){
-  allProducts[0].clicks +=1;
-  console.log(allProducts[0]);
-}
+  if (event.target.id === 'left'){
+    allProducts[0].clicks +=1;
+    console.log(allProducts[0]);
+  }
 
-if (event.target.id === 'center'){
-  allProducts[1].clicks +=1;
-  console.log(allProducts[1]);
-}
+  if (event.target.id === 'center'){
+    allProducts[1].clicks +=1;
+    console.log(allProducts[1]);
+  }
 
-if (event.target.id === 'right'){
-  allProducts[2].clicks +=1;
-  console.log(allProducts[2]);
-}
+  if (event.target.id === 'right'){
+    allProducts[2].clicks +=1;
+    console.log(allProducts[2]);
+  }
   //tally valid clicks
   clickCounter +=1;
   console.log(clickCounter, 'total clicks');
@@ -104,9 +103,10 @@ if (event.target.id === 'right'){
   renderProducts();
   console.log(event.target, 'was clicked after')
 
-randomizeImages();
-displayList();
+  randomizeImages();
+  displayList();
 }
+
 picContainer.addEventListener('click', handleClick)
 
 var picList = document.getElementById('picList');
