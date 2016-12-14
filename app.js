@@ -8,7 +8,22 @@ var filePath = ['img/bag.jpg', 'img/banana.jpg', 'img/bathroom.jpg', 'img/boots.
 
 var products = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can'];
 
-var allProducts = [];
+if(localStorage.getItem('allProducts')){
+  var localStorageAllProducts = localStorage.getItem('allProducts');
+  var allProducts = JSON.parse(localStorageAllProducts);
+}else{
+  console.log('allProducts is blank');
+  var allProducts = [];
+  makeNewProducts();
+}
+//First we check to see fi we have anything in local storage
+//If we do we do have stuff then we set our alProducts array equal to loca storage.
+//If we don't have things in local stoage, we make twenty new products and a blank all products arry and we fill it.
+//
+
+
+
+
 var randomizedImages;
 var clickCounter = 0;
 var numberofApperances = 0;
@@ -34,7 +49,6 @@ function makeNewProducts (){
     allProducts.push (new MakeProducts(products[i], filePath[i]));
   }
 }
-makeNewProducts();
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 //  RANDOMIZED IMAGES
@@ -87,6 +101,11 @@ function renderProducts () {
 }
 renderProducts();
 
+function storeAllProducts (){
+  localStorageAllProducts = JSON.stringify(allProducts);
+  localStorage.setItem('allProducts', localStorageAllProducts);
+}
+
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 // EVENT HANDLER
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -129,7 +148,7 @@ function handleClick(event) {
   // console.log(event.target, 'was clicked before')
   renderProducts();
   // console.log(event.target, 'was clicked after')
-
+  storeAllProducts();
   randomizeImages();
   displayList();
 }
