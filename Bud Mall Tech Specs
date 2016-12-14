@@ -1,4 +1,3 @@
-# Bus_Mall
 make files
 make html skelaton
 defining our global variables
@@ -27,13 +26,12 @@ Event Handler
           - tally number of times that this image was clicked for all times
             - Put the information in a chart
           - tally number of times that they have clicked images (25x max)
-            - If we've reached 25 times
-              - New button which will lead to a new page with a chart
+            - If we've reached 25x
+              - New button
               - Remove event listener
 
-            - If we don't reach 25 times --> New Images (Front)
+            - If we don't reach 25x --> New Images (Front)
               - Pick three new images (that have not been picked)
-              - Prevent duplicates of images in set of three
-              - Prevent
+              - Prevent position duplicates
               - Render or print new images
   -
