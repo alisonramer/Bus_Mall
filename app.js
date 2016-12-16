@@ -161,10 +161,10 @@ function handleClick(event) {
   // console.log(clickCounter, 'total clicks');
 
   //check if total clicks <25
-  if (clickCounter > 5) {
+  if (clickCounter === 25) {
+    displayList();
     return alert ('You Outta Clicks Jane');
   }
-  displayList();
   //after 25, remove event listener on PicNames
     //after 25, show "results" button
     //clear old images
