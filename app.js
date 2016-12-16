@@ -163,6 +163,8 @@ function handleClick(event) {
   //check if total clicks <25
   if (clickCounter === 25) {
     displayList();
+    barChartData();
+    drawChart();
     return alert ('You Outta Clicks Jane');
   }
   //after 25, remove event listener on PicNames
@@ -173,7 +175,7 @@ function handleClick(event) {
   renderProducts();
   // console.log(event.target, 'was clicked after')
   randomizeImages();
-  storeAllProducts();
+  storeAllProducts
   //Call new list here//
 }
 
@@ -202,8 +204,56 @@ renderProducts();
 //BUTTON LISTENERS
 //++++++++++++++++++++++++++++++++++++++++++++
 
-// // document.getElementById('draw-chart').addEventListener('click', function(){
-// //   drawChart();
+var elementChart = document.getElementById('barChart');
+
+
+// ++++++++++++++++++++++++++++++++++++++++++++
+// CHART STUFF
+// ++++++++++++++++++++++++++++++++++++++++++++
+
+var barChartClicks = [];
+var barChartName = [];
+
+function barChartData (){
+  for (var i = 0; i < allProducts.length; i++) {
+    barChartName[i] = allProducts[i].products;
+    barChartClicks[i] = allProducts[i].clicks;
+  }
+}
+
+var data = {
+  labels: products, // titles array we declared earlier
+  datasets: [
+    {
+      data: barChartClicks, // clicks array we declared earlier
+      label: 'clicksPerItem',
+      backgroundColor: [
+        'bisque',
+      ],
+      hoverBackgroundColor: [
+        'purple',
+
+      ]
+    }]
+  };
+
+function drawChart (){
+  var myFinalChart = new Chart (elementChart,{
+  type: 'bar',
+       data: data,
+       options: {
+         responsive: false
+       },
+       scales: [{
+         ticks: {
+           beginAtZero:true
+      }
+    }]
+   });
+
+}
+
+
 // //
 //
 // document.getElementById('list-button').addEventListener('click', function(){
@@ -230,28 +280,7 @@ renderProducts();
 // ++++++++++++++++++++++++++++++++++++++++++++
 // CHART STUFF
 // ++++++++++++++++++++++++++++++++++++++++++++
-//
-// var data = {
-//   labels: products, // titles array we declared earlier
-//   datasets: [
-//     {
-//       data: clicks, // clicks array we declared earlier
-//       backgroundColor: [
-//         'bisque',
-//         'darkgray',
-//         'burlywood',
-//         'lightblue',
-//         'navy'
-//       ],
-//       hoverBackgroundColor: [
-//         'purple',
-//         'purple',
-//         'purple',
-//         'purple',
-//         'purple'
-//       ]
-//     }]
-// };
+
 
 // function drawChart() {
 //   var ctx = document.getElementById('funky-chart').getContext('2d');
