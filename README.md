@@ -18,8 +18,24 @@ What happens when the constructor is called? What happens during this instance?
 
 Call the Constructor Function -> This will initialize the instances.
 
+Removing duplicates
+- Merging the allProducts with randomImages array to create superArray
+- Removing duplicate items in superArray
+    - Splicing
+                function splice(arr, val) {
+            for (var i = arr.length; i--;) {
+              if (arr[i] === val) {
+                arr.splice(i, 1);
+              }
+            }
+}
+
+
+
+
+
 Event Handler
-  - User click
+  - User click --> Where does this click go? Do I put it on the image?!
     - Prevent default (Back)
         - if bad click
           - return alert: you suck! you need to click on an image.

@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link href="style.css" type"text/style" rel="stylesheet" />
+    <link href="style.css" type="text/style" rel="stylesheet" />
     <title>Bus Mall</title>
-    <!-- <script src='Chart.min.js'></script> -->
   </head>
   <h1>Bus Mall</h1>
   <p></p>
@@ -11,12 +10,23 @@
   <body>
 
     <section id="picContainer">
+
       <img id="left" src="" height="300px" width="300px"/>
       <img id="center" src="" height="300px" width="300px"/>
       <img id="right" src="" height="300px" width="300px"/>
+
     </section>
 
+    <button id="draw-chart">Click here to see a chart</button>
+    <button id="list-button">Or a lame old list</button>
+
+    <ul id="funky-list"></ul>
+
+    <canvas id="funky-chart" width="800px" height="400px"></canvas>
+
     <ul id="picList"></ul>
+
+    <!-- <script src='Chart.min.js'></script> -->
     <script src="app.js"></script>
   </body>
 </html>
