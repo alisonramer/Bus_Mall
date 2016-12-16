@@ -1,135 +1,179 @@
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+// BUS MALL PROJECT - CodeFellows Project by Alison Ramer
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 'use strict'
 
+var filePath = ['img/bag.jpg', 'img/banana.jpg', 'img/bathroom.jpg', 'img/boots.jpg', 'img/breakfast.jpg', 'img/bubblegum.jpg', 'img/chair.jpg', 'img/cthulhu.jpg', 'img/dog-duck.jpg', 'img/dragon.jpg', 'img/pen.jpg', 'img/pet-sweep.jpg', 'img/scissors.jpg', 'img/shark.jpg', 'img/sweep.png', 'img/tauntaun.jpg', 'img/unicorn.jpg', 'img/usb.gif', 'img/water-can.jpg', 'img/wine-glass.jpg'];
 
-var filePath = ['img/bag.jpg', 'img/banana.jpg', 'img/bathroom.jpg', 'img/boots.jpg', 'img/breakfast.jpg', 'img/bubblegum.jpg', 'img/chair.jpg', 'img/cthulu.jpg', 'img/dog-duck.jpg', 'img/dragon.jpg', 'img/pen.jpg', 'img/pet-sweep.jpg', 'img/scissors.jpg', 'img/shark.jpg', 'img/sweep.png', 'img/tauntaun.jpg', 'img/unicorn.jpg', 'img/usb.gif', 'img/water-can.jpg', 'img/wine-glass.jpg'];
+var products = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can'];
 
-var products = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can'];
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+// LOCAL STORAGE
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+if(localStorage.getItem('allProducts')){
+  var localStorageAllProducts = localStorage.getItem('allProducts');
+  var allProducts = JSON.parse(localStorageAllProducts);
+}else{
+  console.log('allProducts is blank');
+  var allProducts = [];
+  makeNewProducts();
+}
+//First we check to see fi we have anything in local storage
+//If we do we do have stuff then we set our alProducts array equal to loca storage.
+//If we don't have things in local stoage, we make twenty new products and a blank all products arry and we fill it.
+//
+
+
+
 
 var randomizedImages;
-var clickTotal = 0;
+var clickCounter = 0;
+var numberofApperances = 0;
 
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
-//CONSTRUCTOR FUNCTION -----------for each one of the products of the stores we're going to make the following calculations //
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
-var allProducts = [];
-
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+// CONSTRUCTOR FUNCTION
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
 function MakeProducts (products, filePath) {
-//instances
+  //for each one of the products of the stores we're going to make the following calculations //
   this.products = products;
   this.filePath = filePath;
   this.clicks = 0;
-  this.views = 0;
-  allProducts.push(this);
+  this.numberofApperances = 0;
 }
+//new object that has the above qualities defined.
 
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
-//new object that are created from the above constructor function
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
-function create (){
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+// FUNCTION DECLARATIONS
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+function makeNewProducts (){
   for (var i = 0; i < filePath.length; i++) {
-  new MakeProducts(products[i], filePath[i]); //new here means new instance//
+    allProducts.push (new MakeProducts(products[i], filePath[i]));
   }
 }
-create();
-console.table(allProducts);
 
-//Check to Make Sure Not Duplicates //
-// var newArray =[];
-// var oldArray = [];
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+//  RANDOMIZED IMAGES
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-// function noDuplicatesImages() {
-//     oldArray[0] === newArray[0];
-//     oldArray[1] === newArray[1];
-//     oldArray[2] === newArray[2];
-//
-//     rand();
-//     newArray[0] = filePath[randomizedImages];
-//     while (newArray[0] === newArray [0] || newArray[0] === newArray[1] ||
-//       newArray[0] === oldArray[2]){
-//       console.log(newArray, 'broken value in first position of the array')
-//       newArray[2] = filePath[randomizedImages];
-//       console.log('fixed');
-//     }
-//     rand();
-//     newArray[1] = filePath[randomizedImages];
-//     while (newArray[1] === newArray[0] || newArray[1] === oldArray[0] || newArray[1] === oldArray[1] || newArray[1] === oldArray[2]){
-//     // console.log(newArray, 'old broken array');
-//     newArray[1] = filePath[randomizedImages];
-//     // console.log('caught dupes between 1st and 2nd numbers');
-//     }
-//     rand();
-//     newArray[2] = filePath[randomizedImages];
-//     while (newArray[2] === newArray[0] || newArray[2] === newArray[1] || newArray[2] === oldArray[0] || newArray[2] === oldArray[1] || newArray[2] === oldArray[2]){
-//       // console.log(newArray, 'old broken array');
-//       newArray[2] = filePath[randomizedImages];
-//       // console.log('caught a dupe with the 3rd number');
-//     }
-//     console.log('new array' + newArray)
-//     console.log('old array' + oldArray)
-//     renderProducts();
-// }
+function randomizeImages () {
+  randomizedImages = Math.floor(Math.random() * (20-0) + 0);
+}
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+// RENDER PRODCUCTS
+//now we are going to take the information that we organized and print it onto the screen - with images
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 function renderProducts () {
   //you are defining that the left image is going to be attached to the HTML in the spot with the 'left' attribute. Then you set the src attribute to an actual file path so that it will be displayed on the page.
-
+  randomizeImages ();
   var leftImage = document.getElementById('left');
-  leftImage.src = newArray[0];
+  leftImage.src = filePath[randomizedImages];
+  leftImage.alt = randomizedImages;
+  allProducts[randomizedImages].numberofApperances+=1;
 
 //you are defining that the left image is going to be attached to the HTML in the spot with the 'left' attribute. Then you set the src attribute to an actual file path so that it will be displayed on the page.
-
+  randomizeImages ();
   var centerImage = document.getElementById('center');
-  centerImage.src = newArray[1];
+  centerImage.src = filePath[randomizedImages];
+  centerImage.alt = randomizedImages;
+  allProducts[randomizedImages].numberofApperances+=1;
 
-
+  randomizeImages ();
   var rightImage = document.getElementById('right');
-  rightImage.src = newArray[2];
-  console.log('render Products is working');
+  rightImage.src = filePath[randomizedImages];
+  rightImage.alt = randomizedImages;
+  allProducts[randomizedImages].numberofApperances+=1;
+
+  //Number of Appearances Counter//
+  numberofApperances +=1;
+  // console.log(clickCounter, leftImage.alt, centerImage.alt, rightImage.alt, 'total appearances');
+
+  //Make sure there are no Duplicates //
+
+  while (leftImage.src === centerImage.src || leftImage.src === rightImage.src || centerImage.src === rightImage.src){
+    randomizeImages ();
+    leftImage.src = filePath[randomizedImages];
+    randomizeImages ();
+    centerImage.src = filePath[randomizedImages];
+    randomizeImages ();
+    rightImage.src = filePath[randomizedImages];
+  }
+}
+renderProducts();
+
+function storeAllProducts (){
+  localStorageAllProducts = JSON.stringify(allProducts);
+  localStorage.setItem('allProducts', localStorageAllProducts);
 }
 
-// renderProducts();
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+// EVENT HANDLER
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-//Random Images//
-function rand () {
-  randomizedImages = Math.floor(Math.random() * (20-0) + 0);
-  console.log('randomized is working ' + randomizedImages);
+function handleClick(event) {
+  event.preventDefault();
+  //identify who was clicked
+  // console.log(event.target.src, 'was clicked')
+  //alert for clicks not on images
+  if(event.target.id === 'picContainer'){
+    return alert('Please, click on a picture.');
+  }
+
+  if (event.target.id === 'left'){
+    allProducts[event.target.alt].clicks +=1;
+    // console.log(allProducts[0]);
+  }
+
+  if (event.target.id === 'center'){
+    allProducts[event.target.alt].clicks +=1;
+    // console.log(allProducts[1]);
+  }
+
+  if (event.target.id === 'right'){
+    allProducts[event.target.alt].clicks +=1;
+    // console.log(allProducts[2]);
+  }
+  //tally valid clicks
+  clickCounter +=1;
+  // console.log(clickCounter, 'total clicks');
+
+  //check if total clicks <25
+  if (clickCounter > 25) {
+    return alert ('You Outta Clicks Jane');
+  }
+  //after 25, remove event listener on PicNames
+    //after 25, show "results" button
+    //clear old images
+  //display 3 new images
+  // console.log(event.target, 'was clicked before')
+  renderProducts();
+  // console.log(event.target, 'was clicked after')
+  storeAllProducts();
+  randomizeImages();
+  displayList();
 }
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
-//Event Handler//
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
-//   function handleClick(event){
-//     event.preventDefault();
-// //identify what image was clicked
-//     console.log(event.target.src, 'was clicked');
-//
-// // alert for clicks not on images
-//     if (event.target.id === 'picContainer'){
-//     return alert ('Click on the right spot!')
-//     }
-//     if (event.target.id === 'left'){
-//       allProducts[newArray[0]].clicks +=1;
-//       console.log(allProducts[newArray[0]]);
-//     }
-//     if (event.target.id === 'center'){
-//       allPRoducts[newArray[1]].clicks +=1;
-//       console.log(allProducts[newArray[1]]);
-//     }
-//     if (event.target.id === 'right'){
-//       allProducts[newArray[2]].clicks +=1;
-//       console.log(allProducts[newArray[2]]);
-//     }
-// // tally the click
-//     if (clickCounter < 5) {
-//       return ('YOU OUTTA CLICKS, JACK')
-//     }
-    // check whether total clicks 25 times
-    // after 25, remove event listeners on PicNames
-      //after 25, show "results" button
-      //clear old images
-    // display 3 new images
-// makeArrayOfThreeNumbers();
 
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
-// Event Listener
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
-// makeArrayOfThreeNumbers();
-// picContainer.addEventListener('click', handleClick)
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+// ADD EVENT LISTENER
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+picContainer.addEventListener('click', handleClick)
+
+var picList = document.getElementById('picList');
+function displayList() {
+  picList.innerHTML = '';
+  for (var i = 0; i < allProducts.length; i++) {
+    var liEl = document.createElement('li');
+    var liEl2 = document.createElement('li');
+    liEl.textContent = allProducts[i].products + ' has been clicked ' + allProducts[i].clicks + ' times';
+    liEl2.textContent = allProducts[i].products + ' has been viewed ' + allProducts[i].numberofApperances + ' times';
+    picList.appendChild(liEl);
+    picList.appendChild(liEl2);
+  }
+}
+
+renderProducts();
